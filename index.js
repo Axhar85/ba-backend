@@ -4,6 +4,10 @@ const app = express ();
 
 const port = 5000;
 
+//global middleware to recieve json 
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+
 connection.connect((err) => {
     if(err) {
         console.error(`Error trying to reach the DB. Error: ${err.stack}`)
@@ -17,6 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/students', (req, res) => {
+    console.log('hellooo???', req.body)
     connection.query('SELECT * FROM student',(err, results) => {
             if(err) {
                 res.status(500).send('Server error, could not fetch data from students')
@@ -28,7 +33,7 @@ app.get('/students', (req, res) => {
 })
 
 app.post('/students',(req, res) => {
-    connection.query('INSERT INTO student (user) VALUES ("Manuels")',(err) => {
+    connection.query('INSERT INTO student (user) VALUES ()',(err) => {
             if(err) {
                 res.status(500).send('Server error, could not post data to students')
             }
