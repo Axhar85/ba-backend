@@ -16,6 +16,17 @@ app.get('/', (req, res) => {
     res.send('hey from server')
 })
 
+app.get('/students', (req, res) => {
+    connection.query('SELECT * FROM student',(err, results) => {
+            if(err) {
+                res.status(500).send('Server error, could not fetch data from students')
+            }
+            else {
+                res.json(results)
+            }
+    })
+})
+
 
 app.listen(port, (err)=> {
     if(err) throw new Error('Something didnot work:/ ...')
