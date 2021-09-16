@@ -27,6 +27,17 @@ app.get('/students', (req, res) => {
     })
 })
 
+app.post('/students',(req, res) => {
+    connection.query('INSERT INTO student (user) VALUES ("Manuels")',(err) => {
+            if(err) {
+                res.status(500).send('Server error, could not post data to students')
+            }
+            else {
+                res.sendStatus(201)
+        }
+    })
+})
+
 
 app.listen(port, (err)=> {
     if(err) throw new Error('Something didnot work:/ ...')
