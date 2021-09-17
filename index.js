@@ -1,6 +1,7 @@
 const express = require('express');
 const connection = require('./conf');
 const app = express ();
+const cors = require('cors');
 
 const port = 5000;
 
@@ -8,6 +9,8 @@ const port = 5000;
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
+// Allow cors policies
+app.use(cors())
 connection.connect((err) => {
     if(err) {
         console.error(`Error trying to reach the DB. Error: ${err.stack}`)
@@ -36,7 +39,7 @@ app.post('/students',(req, res) => {
     let student = {
         user: req.body.user
                     }
-                    
+
     connection.query('INSERT INTO student SET ?', student, (err) => {
             if(err) {
                 res.status(500).send('Server error, could not post data to students')
