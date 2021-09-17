@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/students', (req, res) => {
-    console.log('hellooo???', req.body)
+    
     connection.query('SELECT * FROM student',(err, results) => {
             if(err) {
                 res.status(500).send('Server error, could not fetch data from students')
@@ -33,7 +33,11 @@ app.get('/students', (req, res) => {
 })
 
 app.post('/students',(req, res) => {
-    connection.query('INSERT INTO student (user) VALUES ()',(err) => {
+    let student = {
+        user: req.body.user
+                    }
+                    
+    connection.query('INSERT INTO student SET ?', student, (err) => {
             if(err) {
                 res.status(500).send('Server error, could not post data to students')
             }
