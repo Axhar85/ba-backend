@@ -1,0 +1,1 @@
+This is backend of the App with mySQL. It has packages installed Express, Postman. Its connected with frontend which can pass and reterive data. 
